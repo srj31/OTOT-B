@@ -40,7 +40,11 @@ describe("Tasks", () => {
         before(async () => {
             // runs once before the first test in this block
             // delete the task if existing
-            await ormDeleteTask("Task A");
+            try {
+                await ormDeleteTask("Task A");
+            } catch (err) {
+                console.log(err);
+            }
         });
 
         it("should create the task", (done) => {
