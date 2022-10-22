@@ -105,34 +105,32 @@ const App = () => {
         </div>
         <div className="mt-2 row" style={{ paddingLeft: '10vw' }}>
           <div className="col-6">
-            <div className="col-4">
-              {requiredFields.map((requiredField) => {
-                return (
-                  <TextField
-                    required
-                    id="outlined-required"
-                    name={requiredField.name}
-                    label={requiredField.label}
-                    key={requiredField.label}
-                    onChange={handleInput}
-                  />
-                )
-              })}
-            </div>
+            {requiredFields.map((requiredField) => {
+              return (
+                <TextField
+                  required
+                  id="outlined-required"
+                  name={requiredField.name}
+                  label={requiredField.label}
+                  key={requiredField.label}
+                  onChange={handleInput}
+                />
+              )
+            })}
           </div>
           <div className="col-6 d-flex flex-row align-items-center justify-content-center">
             {responses.create}
           </div>
-          <div className="d-flex flex-row justify-content-center pb-3">
-            <Button
-              variant="contained"
-              color="primary"
-              onClick={handleSubmit}
-              style={{ width: '50vw' }}
-            >
-              Submit
-            </Button>
-          </div>
+        </div>
+        <div className="d-flex flex-row justify-content-center pb-3">
+          <Button
+            variant="contained"
+            color="primary"
+            onClick={handleSubmit}
+            style={{ width: '50vw' }}
+          >
+            Submit
+          </Button>
         </div>
       </div>
       <div className="border-bottom">
