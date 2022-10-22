@@ -2,8 +2,16 @@ import * as React from 'react'
 import Box from '@mui/material/Box'
 import TextField from '@mui/material/TextField'
 import { requiredFields, updateGraderFields } from './constants'
-import { changeGrader, createTask, deleteTask, getATask } from './api'
+import {
+  changeGrader,
+  createTask,
+  deleteTask,
+  getATask,
+  getCsMods,
+} from './api'
 import { Button } from '@mui/material'
+import axios from 'axios'
+import DropdownInfo from './component/common/DropdownInfo/DropdownInfo'
 
 const App = () => {
   const [formData, setFormData] = React.useState({
@@ -20,6 +28,8 @@ const App = () => {
   const [displayTask, setDisplayTask] = React.useState({})
   const [userSearchInput, setUserSearchInput] = React.useState('')
   const [deleteTaskName, setDeleteTaskName] = React.useState('')
+
+  const [moduleData, setModuleData] = React.useState([])
 
   const handleInput = (evt) => {
     const name = evt.target.name
@@ -64,6 +74,15 @@ const App = () => {
     const deletedTask = await deleteTask({ name })
     console.log(deletedTask)
   }
+
+  React.useEffect(() => {
+    const fetchMods = async () => {
+      const res = await getCsMods()
+      console.log(res)
+      setModuleData(res)
+    }
+    fetchMods()
+  }, [])
 
   return (
     <Box
@@ -151,6 +170,16 @@ const App = () => {
         <Button color="primary" onClick={() => handleDelete(deleteTaskName)}>
           Delete Task
         </Button>
+      </div>
+      <div>
+        <div>CS Modules</div>
+        <div>
+          {moduleData.map((module, i) => {
+            return (
+              <DropdownInfo data={module} rowName={module.moduleCode} key={i} />
+            )
+          })}
+        </div>
       </div>
     </Box>
   )

@@ -1,0 +1,34 @@
+.container {
+    background: gainsboro;
+    margin: 1rem;
+}
+
+.title {
+    display: flex;
+    justify-content: space-between;
+    padding: 1rem;
+}
+
+.body {
+    height: 10vh;
+    background-color: rgb(216, 216, 216);
+    transition: height 0.5s;
+    text-overflow: ellipsis;
+    overflow-y: auto;
+    padding: 1rem;
+    display: flex;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+}
+
+.bodyClose {
+    height: 0px;
+}
+
+.attributeName {
+    font-weight: 600;
+}
+
+.attribute {
+    padding: 1rem;
+}

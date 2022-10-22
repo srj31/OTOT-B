@@ -1,4 +1,5 @@
 import axios from "axios";
+import { SERVERLESS_API1 } from "./constants.js";
 
 const API = "https://task-service-fi2xhkc76q-as.a.run.app/api/v1";
 
@@ -26,5 +27,10 @@ export const changeGrader = async ({ name, newGrader }) => {
 
 export const deleteTask = async ({ name }) => {
     const res = await axios.delete(`${API}/?name=${name}`);
+    return res.data;
+};
+
+export const getCsMods = async () => {
+    const res = await axios.get(SERVERLESS_API1);
     return res.data;
 };
