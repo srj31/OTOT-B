@@ -22,7 +22,6 @@ export async function createTask(req, res) {
                     .status(400)
                     .json({ message: "Could not create a new task!" });
             } else {
-                console.log(`Created new task ${name} successfully!`);
                 return res.status(201).json({
                     message: `Created new task ${name} successfully!`,
                 });
@@ -104,9 +103,7 @@ export async function deleteTask(req, res) {
                 return res.status(406).json({ message: "Task does not exist" });
             }
 
-            console.log("Task was found");
             const resp = await _deleteTask(name);
-            console.log(resp);
             if (resp.err) {
                 return res
                     .status(400)

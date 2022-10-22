@@ -81,6 +81,17 @@ describe("Tasks", () => {
                     done();
                 });
         });
+
+        it("get a non existing task", (done) => {
+            const taskName = "Task BMW";
+            chai.request(app)
+                .get("/api/v1")
+                .query({ name: taskName })
+                .end((err, res) => {
+                    res.should.have.status(400);
+                    done();
+                });
+        });
     });
 
     describe("PUT /", () => {
@@ -91,6 +102,17 @@ describe("Tasks", () => {
                 .send({ name: taskName, newGrader: "Person 5" })
                 .end((err, res) => {
                     res.should.have.status(200);
+                    done();
+                });
+        });
+
+        it("invalid body for updating task", (done) => {
+            const taskName = "Task C";
+            chai.request(app)
+                .put("/api/v1")
+                .send({ name: taskName })
+                .end((err, res) => {
+                    res.should.have.status(400);
                     done();
                 });
         });
