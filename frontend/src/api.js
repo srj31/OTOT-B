@@ -1,7 +1,5 @@
 import axios from "axios";
-import { SERVERLESS_API1 } from "./constants.js";
-
-const API = "https://task-service-fi2xhkc76q-as.a.run.app/api/v1";
+import { API, SERVERLESS_API1 } from "./constants.js";
 
 export const getATask = async ({ name }) => {
     const res = await axios.get(`${API}/?name=${name}`);
