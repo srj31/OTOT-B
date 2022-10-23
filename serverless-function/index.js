@@ -25,7 +25,11 @@ functions.http("csModsGET", async (req, res) => {
     });
     const modules = resp.data;
     const csmodules = modules.filter((module) => {
-        return module.moduleCode.includes("CS");
+        return (
+            module.moduleCode.includes("CS") &&
+            module.moduleCode.substr(0, 2) == "CS" &&
+            module.semesters.includes(2)
+        );
     });
     res.send(csmodules);
 });
