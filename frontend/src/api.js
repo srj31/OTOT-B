@@ -3,7 +3,7 @@ import { API, SERVERLESS_API1 } from "./constants.js";
 
 export const getATask = async ({ name }) => {
     const res = await axios.get(`${API}/?name=${name}`);
-    return res.data.task;
+    return res.data;
 };
 
 export const createTask = async ({ name, points, grader }) => {

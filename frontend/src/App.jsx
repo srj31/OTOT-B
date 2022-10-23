@@ -54,8 +54,12 @@ const App = () => {
 
     let data = { ...formData }
     //check if all the required inputs are entered
-    const res = await createTask(data)
-    setResponses({ ...responses, create: res.message })
+    try {
+      const res = await createTask(data)
+      setResponses({ ...responses, create: res.message })
+    } catch (err) {
+      setResponses({ ...responses, create: err.response.data.message })
+    }
   }
 
   const handleUpdate = async (evt) => {
@@ -63,23 +67,39 @@ const App = () => {
 
     let data = { ...updateFormData }
     //check if all the required inputs are entered
-    const res = await changeGrader(data)
-    setResponses({ ...responses, update: res.message })
+    try {
+      const res = await changeGrader(data)
+      setResponses({ ...responses, update: res.message })
+    } catch (err) {
+      setResponses({ ...responses, update: err.response.data.message })
+    }
   }
 
   // Search currently resets Filter to none since it filters from crafts
   const handleSearch = async (name) => {
-    const foundTask = await getATask({ name })
-    setResponses({
-      ...responses,
-      find: foundTask.message ? foundTask.message : foundTask,
-    })
-    setDisplayTask(foundTask)
+    try {
+      const res = await getATask({ name })
+      setResponses({
+        ...responses,
+        find: res.message,
+      })
+      setDisplayTask(res.task)
+    } catch (err) {
+      setResponses({
+        ...responses,
+        find: err.response.data.message,
+      })
+      setDisplayTask({})
+    }
   }
 
   const handleDelete = async (name) => {
-    const res = await deleteTask({ name })
-    setResponses({ ...responses, delete: res.message })
+    try {
+      const res = await deleteTask({ name })
+      setResponses({ ...responses, delete: res.message })
+    } catch (err) {
+      setResponses({ ...responses, delete: err.response.data.message })
+    }
   }
 
   React.useEffect(() => {
